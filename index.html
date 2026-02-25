@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aka Ibeawuchi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green: #2dce6c;
+      --dark: #0d0d0d;
+      --mid: #1a1a1a;
+      --light: #f5f0e8;
+      --accent: #ff5733;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--light);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 1.2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      color: var(--green);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--light);
+      font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;
+      opacity: 0.7; transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--green); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(45,206,108,0.12) 0%, transparent 70%);
+      top: 10%; right: -10%;
+      border-radius: 50%;
+      animation: pulse 6s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.1);opacity:0.7} }
+
+    .hero-left { z-index: 1; }
+    .hero-tag {
+      font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .hero-tag::before { content: ''; display: block; width: 30px; height: 1px; background: var(--green); }
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 8vw, 8rem);
+      line-height: 0.9;
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+    }
+    h1 span { color: var(--green); }
+    .hero-desc {
+      font-size: 1.1rem; line-height: 1.7;
+      opacity: 0.7; max-width: 420px; margin-bottom: 2.5rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--green);
+      color: var(--dark);
+      padding: 0.9rem 2.2rem;
+      font-weight: 600; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover { background: #fff; transform: translateY(-2px); }
+
+    .hero-right {
+      display: flex; justify-content: center; align-items: center;
+      z-index: 1;
+    }
+    .avatar-ring {
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      border: 2px solid var(--green);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      animation: spin-slow 20s linear infinite;
+    }
+    @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .avatar-ring::before {
+      content: '';
+      position: absolute; inset: 10px;
+      border-radius: 50%;
+      border: 1px dashed rgba(45,206,108,0.3);
+    }
+    .avatar-inner {
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: var(--green);
+      animation: spin-slow 20s linear infinite reverse;
+      border: 1px solid rgba(45,206,108,0.2);
+    }
+
+    /* ABOUT */
+    .section {
+      padding: 6rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem; letter-spacing: 4px;
+      color: var(--green); text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 2.5rem;
+    }
+    .section-title em { font-style: italic; color: rgba(245,240,232,0.5); }
+
+    /* STATS ROW */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      margin: 4rem 0;
+    }
+    .stat {
+      background: var(--dark);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: var(--green);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+      opacity: 0.5; margin-top: 0.5rem;
+    }
+
+    /* SPORTS */
+    .sports-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .sport-card {
+      background: var(--mid);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem;
+      position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .sport-card:hover { border-color: var(--green); transform: translateY(-4px); }
+    .sport-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .sport-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem; letter-spacing: 1px;
+    }
+    .sport-desc { font-size: 0.85rem; opacity: 0.5; margin-top: 0.4rem; line-height: 1.5; }
+    .sport-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--green);
+      transition: width 0.4s;
+    }
+    .sport-card:hover::after { width: 100%; }
+
+    /* ABOUT TEXT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      line-height: 1.8; opacity: 0.7; margin-bottom: 1rem; font-size: 1rem;
+    }
+    .about-facts { display: flex; flex-direction: column; gap: 1rem; }
+    .fact {
+      display: flex; justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding-bottom: 1rem;
+    }
+    .fact-key { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; }
+    .fact-val { font-size: 0.9rem; font-weight: 500; }
+
+    /* GOALS */
+    .goals-list { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .goal-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: var(--mid); border: 1px solid rgba(255,255,255,0.06);
+      padding: 1.5rem;
+      transition: border-color 0.3s;
+    }
+    .goal-item:hover { border-color: var(--green); }
+    .goal-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem; color: var(--green); line-height: 1; min-width: 40px;
+    }
+    .goal-text h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+    .goal-text p { font-size: 0.85rem; opacity: 0.5; line-height: 1.5; }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--green);
+      color: var(--dark);
+      padding: 5rem 3rem;
+      text-align: center;
+    }
+    .contact-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 6rem);
+      letter-spacing: 3px;
+    }
+    .contact-section p {
+      font-size: 1.1rem; opacity: 0.7; margin: 1rem 0 2rem;
+    }
+    .contact-btn {
+      display: inline-block;
+      background: var(--dark); color: var(--green);
+      padding: 1rem 2.5rem;
+      font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .contact-btn:hover { background: #111; }
+
+    footer {
+      background: var(--dark);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem; opacity: 0.3; letter-spacing: 1px;
+    }
+
+    /* ANIMATIONS */
+    .fade-in {
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp 0.8s forwards;
+    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.25s; }
+    .delay-3 { animation-delay: 0.4s; }
+    .delay-4 { animation-delay: 0.55s; }
+
+    /* DIVIDER */
+    .divider {
+      width: 100%; height: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+      .hero-right { display: none; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .sports-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .section { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">AI</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#sports">Sports</a></li>
+      <li><a href="#goals">Goals</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-tag fade-in">Freshman · Biology · Athlete</p>
+      <h1 class="fade-in delay-1">AKA<br/><span>IBEAWUCHI</span></h1>
+      <p class="hero-desc fade-in delay-2">
+        Student. Athlete. Cashier. Biology major navigating freshman year while competing in three sports and building a future in science.
+      </p>
+      <a href="#about" class="hero-cta fade-in delay-3">Learn More</a>
+    </div>
+    <div class="hero-right fade-in delay-4">
+      <div class="avatar-ring">
+        <div class="avatar-inner">AI</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">19</div>
+      <div class="stat-label">Years Old</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Sports Played</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1st</div>
+      <div class="stat-label">Year in College</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Potential</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <p class="section-label">Who I Am</p>
+    <h2 class="section-title">Student, Athlete, <em>& Everything In Between</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          My name is Aka Ibeawuchi and I'm a 19-year-old freshman pursuing a Biology degree. I've always believed that the same discipline and drive it takes to compete on the field translates directly into the classroom.
+        </p>
+        <p>
+          Balancing academics, three varsity sports, and a part-time job as a cashier has taught me time management, resilience, and how to perform under pressure — skills I know will carry me far in life and in science.
+        </p>
+        <p>
+          Whether I'm sprinting on the track, running plays on the court, or working with cells and organisms in the lab, I bring the same level of intensity and focus to everything I do.
+        </p>
+      </div>
+      <div class="about-facts">
+        <div class="fact">
+          <span class="fact-key">Name</span>
+          <span class="fact-val">Aka Ibeawuchi</span>
+        </div>
+        <div class="fact">
+          <span class="fact-key">Age</span>
+          <span class="fact-val">19 Years Old</span>
+        </div>
+        <div class="fact">
+          <span class="fact-key">Year</span>
+          <span class="fact-val">College Freshman</span>
+        </div>
+        <div class="fact">
+          <span class="fact-key">Major</span>
+          <span class="fact-val">Biology</span>
+        </div>
+        <div class="fact">
+          <span class="fact-key">Occupation</span>
+          <span class="fact-val">Cashier (Part-Time)</span>
+        </div>
+        <div class="fact">
+          <span class="fact-key">Sports</span>
+          <span class="fact-val">Soccer · Basketball · Track</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SPORTS -->
+  <section id="sports" class="section">
+    <p class="section-label">Athletics</p>
+    <h2 class="section-title">Three Sports. <em>One Mindset.</em></h2>
+    <div class="sports-grid">
+      <div class="sport-card">
+        <div class="sport-icon">⚽</div>
+        <div class="sport-name">Soccer</div>
+        <div class="sport-desc">The beautiful game demands vision, teamwork, and endurance. Soccer has taught me to think fast and trust my teammates.</div>
+      </div>
+      <div class="sport-card">
+        <div class="sport-icon">🏀</div>
+        <div class="sport-name">Basketball</div>
+        <div class="sport-desc">From pick-and-roll to full-court pressure, basketball sharpens my instincts and ability to adapt on the fly.</div>
+      </div>
+      <div class="sport-card">
+        <div class="sport-icon">🏃</div>
+        <div class="sport-name">Track</div>
+        <div class="sport-desc">Every second counts. Track pushes me to my physical limits and teaches me what it truly means to compete against myself.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GOALS -->
+  <section id="goals" class="section">
+    <p class="section-label">Looking Ahead</p>
+    <h2 class="section-title">My Goals & <em>Ambitions</em></h2>
+    <div class="goals-list">
+      <div class="goal-item">
+        <div class="goal-num">01</div>
+        <div class="goal-text">
+          <h4>Earn My Biology Degree</h4>
+          <p>Graduate with a strong foundation in biological sciences and open doors to research, medicine, or environmental science.</p>
+        </div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-num">02</div>
+        <div class="goal-text">
+          <h4>Excel in All Three Sports</h4>
+          <p>Continue competing at the highest level, improving my performance while keeping academics my top priority.</p>
+        </div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-num">03</div>
+        <div class="goal-text">
+          <h4>Build Financial Independence</h4>
+          <p>Grow professionally through my work experience and learn to manage my own finances as a young adult.</p>
+        </div>
+      </div>
+      <div class="goal-item">
+        <div class="goal-num">04</div>
+        <div class="goal-text">
+          <h4>Give Back to My Community</h4>
+          <p>Use the knowledge and platform I build to mentor younger students and inspire others through sport and education.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <h2>Let's Connect</h2>
+    <p>Interested in reaching out? I'd love to hear from you.</p>
+    <a href="mailto:aka.ibeawuchi@email.com" class="contact-btn">Send a Message</a>
+  </section>
+
+  <footer>
+    &copy; 2025 Aka Ibeawuchi · Built with passion
+  </footer>
+
+</body>
+</html>
